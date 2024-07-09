@@ -61,6 +61,7 @@ function setContainer(element) {
     document.getElementById("menu").style.flexGrow = "1";
     document.getElementById("menu").style.flexDirection = "row";
     document.getElementById("menu").style.gap = "0";
+    document.getElementById("menu").style.margin = "2px 0";
     document.getElementById("container").style.display = "block";
     document.getElementById("container").style.height = "98vh";
 
