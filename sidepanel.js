@@ -55,11 +55,14 @@ function setContainer(element) {
     for (let i = 0; i < content.length; i++) {
         content[i].style.display = "none";
     }
-    console.log(element);
+
     document.getElementById(element).style.display = "block";
     document.getElementById("menu").style.flexWrap = "wrap";
     document.getElementById("menu").style.flexGrow = "1";
     document.getElementById("menu").style.flexDirection = "row";
+    document.getElementById("menu").style.gap = "0";
     document.getElementById("container").style.display = "block";
     document.getElementById("container").style.height = "98vh";
+
+
 }

@@ -8,6 +8,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
+    gap: 20px;
 }
 
 .content {
@@ -19,7 +20,7 @@ body {
 .btn {
     cursor: pointer;
     font-weight: 600;
-    padding: 2px 4px;
+    padding: 4px 2px;
     border: 1px solid #444;
     border-radius: 4px;
     display: inline-block;
@@ -47,7 +48,7 @@ body {
 }
 
 #gemini {
-    color: purple;
+    color: blueviolet;
 }
 
 #chatgpt {
