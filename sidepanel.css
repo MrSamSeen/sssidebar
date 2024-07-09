@@ -9,6 +9,7 @@ body {
     flex-direction: column;
     width: 100%;
     gap: 20px;
+    margin: 40% 0;
 }
 
 .content {
