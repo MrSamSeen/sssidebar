@@ -2,14 +2,47 @@ console.log("Sidebar loaded");
 document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("gemini").addEventListener("click", function () {
-        let iframe = document.getElementById("cnt-gemini");
-        if (iframe.innerHTML === "") {
-            iframe.innerHTML = `
-            <iframe class="iframe" src="https://gemini.google.com" allowfullscreen></iframe>
-            `;
-        }
         setContainer("cnt-gemini");
-    })
+        loadWebpage("https://gemini.google.com");
+        function loadWebpage(url) {
+            const open = async (url) => {
+                let frame = document.getElementById("gemini-iframe");
+                if (frame) {
+                    frame.className = "";
+                }
+
+                await chrome.declarativeNetRequest.updateSessionRules({
+                    removeRuleIds: [1],
+                    addRules: [{
+                        id: 1,
+                        priority: 1,
+                        action: {
+                            type: "modifyHeaders",
+                            responseHeaders: [
+                                { header: "x-frame-options", operation: "remove" },
+                                { header: "content-security-policy", operation: "remove" },
+                            ],
+                        },
+                        condition: {
+                            urlFilter: "*",
+                            resourceTypes: ["main_frame", "sub_frame", "xmlhttprequest", "websocket"],
+                        },
+                    },
+                    ],
+                });
+                let iframe = document.getElementById("gemini-iframe");
+                iframe.src = url;
+                console.log(open);
+            }
+
+        }
+        // if (iframe.innerHTML === "") {
+        //     iframe.innerHTML = `
+        //     <iframe id="preview" class="hidden" allow="camera; clipboard-write; fullscreen; microphone; geolocation" src="https://google.com"></iframe>
+        //     `;
+        // }
+
+    });
     document.getElementById("chatgpt").addEventListener("click", function () {
         let iframe = document.getElementById("cnt-chatgpt");
         if (iframe.innerHTML === "") {
@@ -28,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
         }
         setContainer("cnt-calc");
-    })
+    });
 
     document.getElementById("cal").addEventListener("click", function () {
         let iframe = document.getElementById("cnt-cal");
@@ -38,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
         }
         setContainer("cnt-cal");
-    })
+    });
     document.getElementById("notes").addEventListener("click", function () {
         let iframe = document.getElementById("cnt-notes");
         if (iframe.innerHTML === "") {
